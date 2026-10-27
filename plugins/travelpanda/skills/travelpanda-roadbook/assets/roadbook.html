@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>TravelPanda Roadbook</title>
+  <link rel="icon" href="data:,">
+  <style>
+    :root{color-scheme:light;font-family:system-ui,-apple-system,"PingFang SC",sans-serif;color:#183b36;background:#fafbf7}
+    *{box-sizing:border-box}body{margin:0}button,a{touch-action:manipulation}button{font:inherit;cursor:pointer;border:1px solid #ccd7cd;border-radius:10px;padding:10px 16px;background:#fff;color:#183b36;min-height:44px;font-size:14px;font-weight:550}button:hover{background:#eaf1e8}button:focus-visible,a:focus-visible{outline:3px solid #a96b24;outline-offset:3px}button:disabled{opacity:.55;cursor:wait}a{color:#246557;text-underline-offset:3px}p{line-height:1.65}
+    header{padding:24px 32px 18px;max-width:1500px;margin:auto}.heading-row{display:flex;align-items:center;justify-content:space-between;gap:24px}.heading-row>div{min-width:0}h1{font-size:clamp(26px,2.6vw,36px);font-weight:650;letter-spacing:-.035em;line-height:1.25;margin:4px 0 10px;text-wrap:balance}.eyebrow{font-size:13px;font-weight:650;letter-spacing:.035em;margin:0;color:#526b5b}#subtitle{color:#52655b;margin:0;max-width:960px;font-size:15px}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:18px}#filters{display:flex;flex-wrap:wrap;gap:4px}#filters button{border-color:transparent;background:transparent}#filters button[aria-pressed=true]{color:#fff;background:#205b4c}#fit{margin-left:auto;background:transparent;border-color:transparent;text-decoration:underline;text-underline-offset:4px}#export{background:#205b4c;color:white;flex-shrink:0;border-color:#205b4c}
+    .layout{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;margin:0 auto;padding:0 32px;max-width:1500px}.map-panel{min-width:0;position:sticky;top:16px;align-self:start}#map{height:65vh;min-height:420px;max-height:760px;border-radius:16px;background:#e4eae1;isolation:isolate}#status{font-size:13px;min-height:22px;margin:12px 0;color:#52655b}#cards{min-width:0;padding:0 12px 0 0}
+    article{padding:4px 0 24px;margin:0 0 24px;border-bottom:1px solid #dce4d9}article:last-child{margin-bottom:0}article h2{font-size:20px;letter-spacing:-.02em;line-height:1.35;margin:0 0 10px}article p{font-size:14px;color:#52655b;margin:10px 0}.metrics{font-weight:650;color:#205b4c;font-size:14px}ol{padding-left:24px;margin-bottom:0}li{margin:18px 0}li::marker{color:#5c7567;font-weight:600}li button{text-align:left;width:100%;padding:3px 0;border:0;border-radius:4px;background:transparent;font-size:15px;font-weight:650;min-height:36px}li button:hover{text-decoration:underline}li small{font-size:13px;color:#52655b;display:block;line-height:1.6;margin-top:5px;overflow-wrap:anywhere}.source{display:inline-block;font-size:13px;margin-top:6px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:9px}
+    footer{max-width:1500px;margin:20px auto 0;padding:0 32px 28px;color:#52655b;font-size:13px;line-height:1.7}footer p{margin:6px 0}.brand-lockup{display:flex;align-items:center;gap:12px;margin-top:24px;padding-top:20px;border-top:1px solid #dce4d9}.brand-lockup img{width:40px;height:40px;border-radius:11px;flex-shrink:0}.brand-lockup a{text-decoration:none}.brand-name{font-size:17px;font-weight:700;color:#183b36;letter-spacing:-.02em}.brand-meta{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:13px;margin-top:3px}.brand-meta a{text-decoration:underline}
+    .stop-pin{border:2px solid white;border-radius:50%;color:white;text-align:center;font:bold 11px/26px system-ui;box-shadow:0 2px 8px #0003}.leaflet-popup-content{font-family:system-ui;line-height:1.6;overflow-wrap:anywhere}.leaflet-control-attribution{font-size:11px!important}#image-preview{margin:12px 0;display:none}#image-preview img{max-width:100%;height:auto;border-radius:12px}#image-preview a{display:inline-block;padding:10px 0}.error{color:#a84426!important}
+    @media(max-width:850px){header{padding:20px 18px 16px}.heading-row{flex-wrap:wrap;gap:8px}#export{margin:4px 0 0}.toolbar{margin-top:12px;gap:6px}#fit{margin-left:0}.layout{grid-template-columns:1fr;padding:0 18px;gap:20px}.map-panel{position:static}#map{height:52vh;min-height:330px;max-height:540px}#cards{padding:0}article{padding:4px 0 20px}footer{padding:0 18px 24px}.brand-meta{display:block}.brand-meta a{display:block;margin-top:3px}}
+    h1,article h2,#subtitle{overflow-wrap:anywhere}button{max-width:100%}.brand-lockup>div{min-width:0;overflow-wrap:anywhere}.leaflet-control-attribution{max-width:100%;overflow-wrap:anywhere}
+    @media(prefers-reduced-motion:no-preference){button{transition:background-color .15s ease,transform .12s ease}button:active:not(:disabled){transform:translateY(1px)}}
+    [hidden]{display:none!important}body:not([data-map-state="ready"]) .layout{grid-template-columns:1fr}body:not([data-map-state="ready"]) .map-panel{position:static}.text-fallback{max-width:1000px;margin:auto;padding:20px}.text-fallback a{overflow-wrap:anywhere}
+  </style>
+</head>
+<body>
+  <noscript>__ROADBOOK_FALLBACK__</noscript>
+  <header hidden><div class="heading-row"><div><p id="travel-mode" class="eyebrow"></p><h1 id="title"></h1><p id="subtitle"></p></div><button id="export" type="button" hidden disabled></button></div><div class="toolbar"><div id="filters" role="group"></div><button id="fit" type="button" hidden></button></div></header>
+  <main class="layout"><section class="map-panel"><div id="map" hidden></div><p id="status" role="status" aria-live="polite"></p><div id="image-preview"></div></section><aside id="cards"></aside></main>
+  <footer><p id="disclaimer"></p><p>© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a> · <a href="https://routing.openstreetmap.de/about.html" target="_blank" rel="noopener">OSRM / FOSSGIS</a> · WGS84 · <a id="fix" href="https://www.openstreetmap.org/fixthemap" target="_blank" rel="noopener"></a></p><p id="privacy"></p><div class="brand-lockup"><img id="brand-icon" src="__BRAND_ICON__" alt="" width="40" height="40"><div><a class="brand-name" href="https://travelpanda.ai/" target="_blank" rel="noopener">TravelPanda</a><div class="brand-meta"><span id="brand-platform">__BRAND_PLATFORM__</span><a href="https://travelpanda.ai/" target="_blank" rel="noopener">travelpanda.ai</a></div></div></div></footer>
+  <script id="roadbook-data" type="application/json">__ROADBOOK_DATA__</script>
+  <script>
+  'use strict';
+  const data = JSON.parse(document.getElementById('roadbook-data').textContent);
+  const labels = {
+    'zh-CN':{all:'全程',fit:'显示所选全程',export:'导出当前地图 PNG',source:'点位来源',fix:'报告地图问题',missing:'道路线未取得；仅展示点位',drive:'参考驾车',hours:'小时',ready:'可缩放、拖动或点击点位；图片导出当前视野。',loading:'正在加载当前视野的底图…',tileError:'底图加载失败；路线和点位仍可查看。请检查网络后再导出。',exportError:'图片未生成：请等底图加载完成；仍失败时保留页面并说明宿主限制。',saved:'图片已生成；可下载，或长按下方图片保存。',save:'保存 PNG',blocked:'此宿主未提供可运行脚本的 HTTP(S) 页面或地图依赖未加载。行程清单仍可阅读。',disclaimer:'驾车路线与时长仅供参考，不含实时交通、停车、游览及景区内部步行；不是实时导航。未取得路线的日期不画连线。',privacy:'打开页面会向公共服务请求地图瓦片；路线已保存在文件中。分享 HTML 会包含行程、点位和备注。',view:'地图视野',route:'道路线',checked:'核对日期'},
+    en:{all:'All days',fit:'Fit selected route',export:'Export current map PNG',source:'Place source',fix:'Report a map issue',missing:'Road route unavailable; stops only',drive:'Driving estimate',hours:'h',ready:'Zoom, pan or select a stop. Export uses the current view.',loading:'Loading the visible map…',tileError:'Map tiles failed. Routes and stops remain visible; check the network before exporting.',exportError:'Image not generated. Wait for map tiles; if it still fails, keep the HTML and report the host limitation.',saved:'Image ready. Download it or press and hold the preview to save.',save:'Save PNG',blocked:'This host lacks an executable HTTP(S) preview or map dependencies failed. The itinerary remains readable.',disclaimer:'Driving routes and times exclude live traffic, parking, sightseeing and walking inside attractions. Not live navigation. Unrouted days have no connecting lines.',privacy:'Opening this page requests public map tiles. Routes are embedded. Sharing the HTML includes the itinerary, coordinates and notes.',view:'Map view',route:'Road route',checked:'Checked'},
+    ja:{all:'全日程',fit:'選択したルート全体',export:'現在の地図をPNG保存',source:'地点の出典',fix:'地図の問題を報告',missing:'ルート未取得・地点のみ表示',drive:'車での参考時間',hours:'時間',ready:'拡大・移動・地点選択ができます。現在の表示範囲を書き出します。',loading:'表示範囲の地図を読み込み中…',tileError:'地図の読み込みに失敗しました。通信を確認してください。',exportError:'画像を生成できません。地図の読み込みを待ち、失敗が続く場合はHTMLを保持してください。',saved:'画像を生成しました。ダウンロードまたは長押しで保存できます。',save:'PNGを保存',blocked:'HTTP(S)プレビューまたは地図ライブラリが利用できません。旅程一覧は表示できます。',disclaimer:'車の参考ルートです。渋滞、駐車、観光、施設内の徒歩時間を含みません。リアルタイム案内ではありません。未取得日は線を表示しません。',privacy:'地図タイルは公共サービスから取得します。ルートはファイル内に保存済みです。HTMLの共有には旅程・座標・メモが含まれます。',view:'地図',route:'道路ルート',checked:'確認日'},
+    ko:{all:'전체 일정',fit:'선택 경로 전체 보기',export:'현재 지도 PNG 저장',source:'장소 출처',fix:'지도 문제 신고',missing:'도로 경로 없음 · 지점만 표시',drive:'예상 운전',hours:'시간',ready:'확대, 이동 또는 지점 선택이 가능합니다. 현재 화면을 이미지로 저장합니다.',loading:'현재 화면의 지도 로딩 중…',tileError:'지도 로딩 실패. 네트워크를 확인한 뒤 저장하세요.',exportError:'이미지를 만들지 못했습니다. 지도를 기다린 뒤에도 실패하면 HTML을 보관하세요.',saved:'이미지가 준비되었습니다. 다운로드하거나 길게 눌러 저장하세요.',save:'PNG 저장',blocked:'실행 가능한 HTTP(S) 미리보기 또는 지도 라이브러리를 사용할 수 없습니다. 일정 목록은 볼 수 있습니다.',disclaimer:'운전 경로와 시간은 참고용이며 실시간 교통, 주차, 관광, 관광지 내 도보를 포함하지 않습니다. 실시간 길 안내가 아닙니다. 경로가 없는 날은 선을 표시하지 않습니다.',privacy:'지도 타일은 공용 서비스에서 요청합니다. 경로는 파일에 저장됩니다. HTML 공유에는 일정, 좌표, 메모가 포함됩니다.',view:'지도',route:'도로 경로',checked:'확인 날짜'}
+  };
+  const t = labels[data.language] || labels.en;
+  const previewText = {
+    'zh-CN':{file:'当前是文件预览，无法显示交互地图。请使用对话中的交互预览入口；下方行程仍可阅读，也可查看导出的 PNG 图片。',dependencies:'地图组件未能加载。请联网后重新打开交互预览；下方行程仍可阅读。',loading:'正在加载交互地图，行程清单已可阅读…'},
+    en:{file:'This file preview cannot display the interactive map. Use the interactive preview in the conversation; the itinerary below and any exported PNG remain readable.',dependencies:'Map components could not load. Reopen the interactive preview when connected; the itinerary remains readable.',loading:'Loading the interactive map. The itinerary is already available below…'},
+    ja:{file:'このファイルプレビューでは地図を操作できません。会話内の地図プレビューをご利用ください。以下の旅程や書き出したPNGは閲覧できます。',dependencies:'地図の読み込みに失敗しました。接続後にプレビューを開き直してください。旅程は閲覧できます。',loading:'地図を読み込み中です。以下の旅程は閲覧できます…'},
+    ko:{file:'이 파일 미리보기에서는 지도를 표시할 수 없습니다. 대화의 지도 미리보기를 이용하세요. 아래 일정과 내보낸 PNG는 볼 수 있습니다.',dependencies:'지도 구성 요소를 불러오지 못했습니다. 연결 후 미리보기를 다시 여세요. 일정은 계속 볼 수 있습니다.',loading:'지도를 불러오는 중입니다. 아래 일정은 볼 수 있습니다…'}
+  }[data.language] || {file:t.blocked,dependencies:t.blocked,loading:t.loading};
+  const modeLabels = {
+    'zh-CN': {
+      walking:{name:'步行路书',estimate:'参考步行',disclaimer:'步行路线与时长仅供参考，不含休息、游览及未纳入路线的景区内部步行；不保证无障碍或道路实时开放。不是实时导航。未取得路线的日期不画连线。'},
+      cycling:{name:'骑行路书',estimate:'参考骑行',disclaimer:'骑行路线与时长仅供参考，不含休息、游览和租还车；不保证道路实时开放或自行车可用。请遵守现场通行规定，不是实时导航。未取得路线的日期不画连线。'},
+      driving:{name:'驾车路书'}
+    },
+    en: {
+      walking:{name:'Walking roadbook',estimate:'Walking estimate',disclaimer:'Walking routes and times exclude breaks, sightseeing and paths inside attractions not included in the route. Accessibility and current access are not guaranteed. Not live navigation. Unrouted days have no connecting lines.'},
+      cycling:{name:'Cycling roadbook',estimate:'Cycling estimate',disclaimer:'Cycling routes and times exclude breaks, sightseeing and bike pickup or return. Current road access and bike availability are not guaranteed. Follow local signs. Not live navigation. Unrouted days have no connecting lines.'},
+      driving:{name:'Driving roadbook'}
+    },
+    ja: {
+      walking:{name:'徒歩ルートブック',estimate:'徒歩の参考時間',disclaimer:'徒歩ルートと時間は目安です。休憩、観光、経路に含まれない施設内の移動を除きます。バリアフリーや現在の通行可否は保証されません。リアルタイム案内ではありません。未取得日は線を表示しません。'},
+      cycling:{name:'自転車ルートブック',estimate:'自転車の参考時間',disclaimer:'自転車ルートと時間は目安です。休憩、観光、貸出・返却時間を除きます。現在の通行可否や自転車の在庫は保証されません。現地の標識に従ってください。リアルタイム案内ではありません。未取得日は線を表示しません。'},
+      driving:{name:'車のルートブック'}
+    },
+    ko: {
+      walking:{name:'도보 로드북',estimate:'예상 도보',disclaimer:'도보 경로와 시간은 참고용이며 휴식, 관광, 경로에 포함되지 않은 관광지 내부 이동을 제외합니다. 무장애 접근과 현재 통행 가능 여부는 보장되지 않습니다. 실시간 길 안내가 아닙니다. 경로가 없는 날은 선을 표시하지 않습니다.'},
+      cycling:{name:'자전거 로드북',estimate:'예상 자전거',disclaimer:'자전거 경로와 시간은 참고용이며 휴식, 관광, 대여·반납 시간을 제외합니다. 현재 통행 가능 여부와 자전거 재고는 보장되지 않습니다. 현장 표지판을 따르세요. 실시간 길 안내가 아닙니다. 경로가 없는 날은 선을 표시하지 않습니다.'},
+      driving:{name:'운전 로드북'}
+    }
+  };
+  const travel = {estimate:t.drive,disclaimer:t.disclaimer,...(modeLabels[data.language]||modeLabels.en)[data.mode]};
+  const minutes = {'zh-CN':'分钟',en:'min',ja:'分',ko:'분'}[data.language] || 'min';
+  const colors = ['#18796b','#cc6e2b','#6957ad','#ac4768','#387ca9','#657c2e','#8f6242'];
+  const el = id => document.getElementById(id);
+  const node = (tag, content, cls) => {const n=document.createElement(tag);if(content!==undefined)n.textContent=content;if(cls)n.className=cls;return n;};
+  const link = (url, title) => {const a=node('a',title,'source');const u=new URL(url);if(u.protocol==='https:'&&!u.username&&!u.password)a.href=u.href;a.target='_blank';a.rel='noopener';return a;};
+  const duration = seconds => seconds < 3600 ? `${seconds > 0 ? Math.max(1,Math.round(seconds/60)) : 0} ${minutes}` : `${(seconds/3600).toFixed(1)} ${t.hours}`;
+  const metric = d => d.route ? `${(d.route.distance/1000).toFixed(1)} km · ${travel.estimate} ${duration(d.route.duration)}` : t.missing;
+  document.documentElement.lang=data.language;document.title=data.title+' | TravelPanda';
+  document.querySelector('header').hidden=false;
+  for(const [id,value] of Object.entries({title:data.title,subtitle:data.subtitle,'travel-mode':travel.name,fit:t.fit,export:t.export,disclaimer:travel.disclaimer,privacy:t.privacy,fix:t.fix}))el(id).textContent=value;
+  el('map').setAttribute('aria-label',t.view);el('filters').setAttribute('aria-label',t.all);
+  let map, tiles, selected=-1, groups=[], markers=[], moving=false, exporting=false, previewURL;
+  function status(message,error=false){el('status').textContent=message;el('status').classList.toggle('error',error);}
+  function currentDays(){return data.days.map((day,index)=>({day,index})).filter(v=>selected===-1||v.index===selected);}
+  function popup(stop){const box=node('div');box.append(node('strong',stop.name),node('p',stop.note),node('p',stop.coordinateNote),link(stop.source,t.source));return box;}
+  function cards(){el('cards').replaceChildren();for(const {day,index} of currentDays()){
+    const card=node('article');const title=node('h2');const dot=node('span',undefined,'dot');dot.style.background=colors[index];title.append(dot,document.createTextNode(day.title));card.append(title,node('div',metric(day),'metrics'),node('p',day.note));
+    if(day.route)card.append(link(day.route.source,`${t.route} · ${day.route.retrievedAt.slice(0,10)}`));
+    const list=node('ol');day.stops.forEach((stop,j)=>{const li=node('li');const b=node(map?'button':'strong',stop.name);if(map){b.type='button';b.onclick=()=>{map.setView([stop.coordinates[1],stop.coordinates[0]],Math.max(map.getZoom(),12),{animate:false});markers[index][j].openPopup();};}li.append(b,node('small',stop.note),node('small',`${stop.coordinateNote} · ${t.checked} ${stop.checkedAt}`),link(stop.source,t.source));list.append(li);});card.append(list);el('cards').append(card);
+  }}
+  function fit(){if(!map)return;const points=currentDays().flatMap(({day})=>day.route?day.route.geometry.coordinates:day.stops.map(s=>s.coordinates));map.fitBounds(points.map(p=>[p[1],p[0]]),{padding:[35,35],maxZoom:14,animate:false});}
+  function select(index){selected=index;for(const b of el('filters').children)b.setAttribute('aria-pressed',String(Number(b.dataset.day)===index));if(map){map.closePopup();groups.forEach((g,i)=>{if(index===-1||index===i)g.addTo(map);else g.remove();});}cards();fit();}
+  [t.all,...data.days.map((_,i)=>`D${i+1}`)].forEach((title,i)=>{const b=node('button',title);b.type='button';b.dataset.day=i-1;b.onclick=()=>select(i-1);el('filters').append(b);});
+  el('fit').onclick=fit;
+  function visibleTiles(){const rect=el('map').getBoundingClientRect();return [...el('map').querySelectorAll('img.leaflet-tile')].filter(img=>{const r=img.getBoundingClientRect();return r.right>rect.left&&r.left<rect.right&&r.bottom>rect.top&&r.top<rect.bottom;});}
+  function exportReady(){return map&&tiles&&!moving&&!tiles.isLoading()&&visibleTiles().length&&visibleTiles().every(img=>img.complete&&img.naturalWidth>0);}
+  function refresh(){el('export').disabled=exporting||!exportReady();if(exporting||!map||!tiles)return;if(tiles.isLoading())status(t.loading);else if(!exportReady())status(t.tileError,true);else status(t.ready);}
+  function unavailable(reason,message){
+    if(map){try{map.remove();}catch(error){/* Keep the text itinerary even after partial map initialization. */}}
+    map=undefined;tiles=undefined;groups=[];markers=[];
+    document.body.dataset.mapState=reason;
+    for(const id of ['map','fit','export'])el(id).hidden=true;
+    select(selected);status(message,true);
+  }
+  function dependency(tag,url,integrity){return new Promise((resolve,reject)=>{
+    const resource=document.createElement(tag);resource.crossOrigin='anonymous';resource.integrity=integrity;
+    if(tag==='link'){resource.rel='stylesheet';resource.href=url;}else{resource.src=url;resource.async=true;}
+    const fail=()=>{clearTimeout(timer);resource.onload=null;resource.onerror=null;resource.remove();reject(new Error('Map dependency unavailable'));};
+    const timer=setTimeout(fail,10000);resource.onerror=fail;resource.onload=()=>{clearTimeout(timer);resolve();};document.head.append(resource);
+  });}
+  async function startMap(){
+    select(-1);
+    if(!/^https?:$/.test(location.protocol)){unavailable('unsupported-preview',previewText.file);return;}
+    document.body.dataset.mapState='loading';status(previewText.loading);
+    try{
+      await Promise.all([
+        dependency('link','https://unpkg.com/leaflet@1.9.4/dist/leaflet.css','sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY='),
+        dependency('script','https://unpkg.com/leaflet@1.9.4/dist/leaflet.js','sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=')
+      ]);
+      if(!window.L)throw new Error('Map library unavailable');
+      document.body.dataset.mapState='ready';
+      for(const id of ['map','fit','export'])el(id).hidden=false;
+    map=L.map('map',{zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false,scrollWheelZoom:false});
+    tiles=L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,crossOrigin:'anonymous',keepBuffer:0,updateWhenIdle:true,updateWhenZooming:false,attribution:'© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>'}).addTo(map);
+    data.days.forEach((day,i)=>{const group=L.layerGroup();if(day.route)L.geoJSON(day.route.geometry,{style:{color:colors[i],weight:5,opacity:.85}}).addTo(group);markers[i]=day.stops.map((stop,j)=>{const mark=L.marker([stop.coordinates[1],stop.coordinates[0]],{title:stop.name,icon:L.divIcon({className:'',html:`<div class="stop-pin" style="background:${colors[i]}">${i+1}.${j+1}</div>`,iconSize:[30,30],iconAnchor:[15,15]})});mark.bindPopup(popup(stop)).addTo(group);return mark;});groups.push(group);});
+    tiles.on('loading load tileerror',()=>requestAnimationFrame(refresh));map.on('movestart zoomstart',()=>{moving=true;refresh();});map.on('moveend zoomend',()=>{moving=false;requestAnimationFrame(refresh);});
+    new ResizeObserver(()=>map.invalidateSize({animate:false})).observe(el('map'));
+    select(selected);
+    }catch(error){unavailable('dependencies-unavailable',previewText.dependencies);}
+  }
+  startMap();
+
+  // Render only tiles already loaded for the visible viewport. No offscreen map or tile downloads.
+  function wrap(ctx,value,width){
+    const lines=[],segmenter=new Intl.Segmenter(data.language,{granularity:'word'});
+    for(const paragraph of String(value).split('\n')){
+      let line='';
+      for(const {segment} of segmenter.segment(paragraph)){
+        if(line&&ctx.measureText(line+segment).width>width){lines.push(line.trimEnd());line='';}
+        const word=line?segment:segment.trimStart();
+        for(const char of word){
+          if(line&&ctx.measureText(line+char).width>width){lines.push(line);line='';}
+          line+=char;
+        }
+      }
+      if(line)lines.push(line.trimEnd());
+    }
+    return lines;
+  }
+  async function exportImage(){
+    await document.fonts.ready;
+    const brandIcon=el('brand-icon');await brandIcon.decode();
+    if(!exportReady())throw new Error('Visible tiles are not ready');
+    const r=el('map').getBoundingClientRect(), width=Math.round(r.width), height=Math.round(r.height);
+    const canvas=document.createElement('canvas');const ctx=canvas.getContext('2d');
+    const font='system-ui,-apple-system,"PingFang SC",sans-serif';
+    ctx.font=`650 28px ${font}`;const titleLines=wrap(ctx,data.title,width-48);
+    ctx.font=`14px ${font}`;const subtitleLines=wrap(ctx,data.subtitle,width-48);
+    const header=76+titleLines.length*34+subtitleLines.length*22;
+    const details=currentDays().flatMap(({day,index})=>[
+      {text:day.title,color:colors[index],bold:true},{text:metric(day),color:'#183b36'},
+      {text:day.note,color:'#536b62'},
+      ...(day.route?[{text:`${t.route} · ${day.route.retrievedAt.slice(0,10)}`,color:'#536b62'}]:[]),
+      ...day.stops.flatMap((stop,j)=>[
+        {text:`${index+1}.${j+1} · ${stop.name}`,color:'#183b36'},
+        {text:stop.note,color:'#536b62'},
+        {text:`${stop.coordinateNote} · ${t.checked} ${stop.checkedAt}`,color:'#536b62'},
+        {text:`${t.source} · ${new URL(stop.source).hostname}`,color:'#536b62'}
+      ])
+    ]);
+    const lines=details.flatMap(item=>{ctx.font=`${item.bold?'650 18':'14'}px ${font}`;return wrap(ctx,item.text,width-48).map(text=>({...item,text}));});
+    ctx.font=`13px ${font}`;
+    const footer=wrap(ctx,travel.disclaimer,width-48);
+    const credits=wrap(ctx,'© OpenStreetMap contributors · openstreetmap.org/copyright · OSRM / FOSSGIS · WGS84',width-48);
+    const platformLines=wrap(ctx,el('brand-platform').textContent,width-110);
+    const totalHeight=header+height+32+lines.length*26+(footer.length+credits.length)*20+120+platformLines.length*19;
+    const scale=Math.min(window.devicePixelRatio||1,2,Math.sqrt(12000000/(width*totalHeight)));
+    canvas.width=Math.round(width*scale);canvas.height=Math.round(totalHeight*scale);ctx.scale(scale,scale);
+    ctx.fillStyle='#fafbf7';ctx.fillRect(0,0,width,totalHeight);
+    let y=28;ctx.fillStyle='#526b5b';ctx.font=`600 13px ${font}`;ctx.fillText(travel.name,24,y);y+=30;
+    ctx.fillStyle='#183b36';ctx.font=`650 28px ${font}`;for(const line of titleLines){ctx.fillText(line,24,y);y+=34;}
+    ctx.font=`14px ${font}`;ctx.fillStyle='#52655b';for(const line of subtitleLines){ctx.fillText(line,24,y);y+=22;}
+    ctx.save();ctx.beginPath();ctx.rect(0,header,width,height);ctx.clip();
+    for(const img of visibleTiles()){const b=img.getBoundingClientRect();ctx.drawImage(img,b.left-r.left,header+b.top-r.top,b.width,b.height);}
+    for(const {day,index} of currentDays()){
+      if(day.route){ctx.beginPath();day.route.geometry.coordinates.forEach((p,j)=>{const pt=map.latLngToContainerPoint([p[1],p[0]]);if(j)ctx.lineTo(pt.x,header+pt.y);else ctx.moveTo(pt.x,header+pt.y);});ctx.lineWidth=4;ctx.strokeStyle=colors[index];ctx.lineJoin='round';ctx.lineCap='round';ctx.stroke();}
+      day.stops.forEach((stop,j)=>{const p=map.latLngToContainerPoint([stop.coordinates[1],stop.coordinates[0]]);ctx.beginPath();ctx.arc(p.x,header+p.y,13,0,Math.PI*2);ctx.fillStyle=colors[index];ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();ctx.fillStyle='#fff';ctx.font=`bold 10px ${font}`;ctx.textAlign='center';ctx.fillText(`${index+1}.${j+1}`,p.x,header+p.y+4);ctx.textAlign='left';});
+    }
+    ctx.restore();y=header+height+26;
+    for(const line of lines){ctx.font=`${line.bold?'650 18':'14'}px ${font}`;ctx.fillStyle=line.color;ctx.fillText(line.text,24,y);y+=26;}
+    ctx.font=`13px ${font}`;ctx.fillStyle='#52655b';y+=12;for(const line of [...footer,...credits]){ctx.fillText(line,24,y);y+=20;}
+    y+=12;ctx.fillStyle='#dce4d9';ctx.fillRect(24,y,width-48,1);y+=20;
+    ctx.save();ctx.beginPath();ctx.roundRect(24,y,40,40,11);ctx.clip();ctx.drawImage(brandIcon,24,y,40,40);ctx.restore();
+    ctx.font=`700 17px ${font}`;ctx.fillStyle='#183b36';ctx.fillText('TravelPanda',78,y+16);
+    ctx.font=`13px ${font}`;ctx.fillStyle='#52655b';y+=37;for(const line of platformLines){ctx.fillText(line,78,y);y+=19;}ctx.fillText('travelpanda.ai',78,y);
+    return new Promise((resolve,reject)=>canvas.toBlob(blob=>blob?resolve(blob):reject(new Error('PNG encoding failed')),'image/png'));
+  }
+  el('export').onclick=async()=>{exporting=true;el('export').disabled=true;try{const blob=await exportImage();if(previewURL)URL.revokeObjectURL(previewURL);previewURL=URL.createObjectURL(blob);const image=node('img');image.src=previewURL;image.alt=data.title;const a=node('a',t.save);a.href=previewURL;a.download='travelpanda-roadbook.png';el('image-preview').replaceChildren(a,image);el('image-preview').style.display='block';a.click();status(t.saved);}catch(error){status(t.exportError,true);}finally{exporting=false;el('export').disabled=!exportReady();}};
+  </script>
+</body>
+</html>

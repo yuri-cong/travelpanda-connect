@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "travelpanda_plugin": {
+      "url": "https://api-sg.travelpanda.ai/agent/mcp",
+      "scopes": ["account:read", "trips:read", "trips:write", "bamboo:spend"],
+      "oauth_resource": "https://api-sg.travelpanda.ai/agent/mcp",
+      "oauth": {"clientId": "travelpanda-codex", "callbackUrl": "http://127.0.0.1:5555/callback", "callbackPort": 5555},
+      "extensions": {
+        "com.openai": {
+          "auth": {
+            "type": "oauth",
+            "client": {
+              "mode": "provided",
+              "clientId": "travelpanda-codex",
+              "tokenEndpointAuthMethod": "none"
+            },
+            "resource": "https://api-sg.travelpanda.ai/agent/mcp",
+            "baseScopes": ["account:read", "trips:read", "trips:write", "bamboo:spend"],
+            "oidcEnabled": false
+          }
+        }
+      }
+    }
+  }
+}
